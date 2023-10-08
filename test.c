@@ -27,11 +27,14 @@ main ()
 
   parser_start (&g);
 
-  ParserDiagnostic m = examine (&g, "()");
+  ParserDiagnostic m = examine (&g, "(print (1 2 3))"); /* a simple S-expression */
 
-  if (m.p_balanced) {
-    printf("is balanced!\n");
-  } else {
-    printf("is not balanced!\n");
-  }
+  if (m.p_balanced)
+    {
+      printf ("is balanced!\n");
+    }
+  else
+    {
+      printf ("is not balanced!\n");
+    }
 }

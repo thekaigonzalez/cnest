@@ -8,33 +8,32 @@
 
 main ()
 {
-  Stack s;
+  //   Stack s;
 
-  Symbol open = create_symbol ('{');
-  Symbol close = create_symbol ('}');
+  //   Symbol open = create_symbol ('{');
+  //   Symbol close = create_symbol ('}');
 
-  stack_initialize (&s);
+  //   stack_initialize (&s);
 
-  stack_move (&s, &open); // {
-  stack_move (&s, &open); // {{
+  //   stack_move (&s, &open); // {
+  //   stack_move (&s, &open); // {{
 
-  stack_pop (&s, &close); // {{ }
-  stack_pop (&s, &close); // {{ }}
+  //   stack_pop (&s, &close); // {{ }
+  //   stack_pop (&s, &close); // {{ }}
 
   // stack is clear
 
-  Parser g;
+  Stack s;
+  string str;
+  
+  string1(&str);
+  stack_initialize(&s);
 
-  parser_start (&g);
+  parser_populate(&s, "(print (1 2 3))", &str);
 
-  ParserDiagnostic m = examine (&g, "(print (1 2 3))"); /* a simple S-expression */
+  printf("%s\n", str._p);
 
-  if (m.p_balanced)
-    {
-      printf ("is balanced!\n");
-    }
-  else
-    {
-      printf ("is not balanced!\n");
-    }
+  //   ParserDiagnostic m = examine (&g, "(print (1 2 3))"); /* a simple
+  //   S-expression */
+  //   parser_populate (&g, "(print (1 2 3))"); /* a simple S-expression */
 }

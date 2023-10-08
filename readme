@@ -1,0 +1,50 @@
+simple balance checker for parenthesis and braces (can be extended)
+
+how it works:
+
+        I can't explain this very well so don't come at me
+
+        in essence, it checks and serializes two different types of characters,
+        one of them being an 'open' character (0), and the other being a 'close'
+        character (-1)
+
+        now from an "expose(e)" standpoint you will not have to create these
+        data types yourself, as there are functions that do it for you.
+
+                Symbol open = create_symbol ('{');
+                Symbol close = create_symbol ('}');
+            
+        you just have to give the function the right symbol. Now, obviously this
+        is a more manual way to use this, there is an example on how to extend
+        the library with a Parser found in `parser.c`, but thats more explained
+        in the diagram.
+
+        each symbol comes with their own set of values, listed below.
+        
+        
+        * the character (obviously)
+        * and it's OPEN or CLOSE value.
+
+        when you first add an open character, it will be added as the first
+        member of the stack. when you add a close character, it will be checked
+        against the newly added member of the stack and it will be removed if
+        both characters are the same.
+
+        in essence this algorithm is mostly flawless, however, not EVERY
+        scenario has been tested, so there is no guarantee that it'll work with
+        your specific case. but for the most part it can check against common
+        cases of unbalanced parenthesis and braces.
+
+note:
+
+        this algorithm comes from a random java tutorial i read online somewhere
+        one day trying to do this problem i had quite a while ago when i started
+        learning c.
+
+        this is my (not-so-great) attempt at porting most of what i saw to c.
+
+copyright:
+
+        copyright (c) kai d. gonzalez 2019-2023
+        licensed under the mit license
+        any questions? email me at <gkai70263@gmail.com>

@@ -11,19 +11,14 @@
 typedef struct Parser
 {
   Stack stack;
-  string data;
 } Parser;
 
 // simple structure to return different values about the
 // statement being parsed
 typedef struct parser_diagnostic
 {
-    int p_balanced;
+  int p_balanced;
 } ParserDiagnostic;
-
-
-// add a character to the universal data buffer of the parser
-void parser_add_data (Parser *p, char s);
 
 // insert a symbol to the stack
 void parser_insert (Parser *p, char s);
@@ -34,7 +29,10 @@ void parser_pop (Parser *p, char s);
 // initialize the parser and it's children
 void parser_start (Parser *p);
 
+// update the parser's data buffer
+void parser_populate (Stack *p, const char *stat, string *str);
+
 // returns a ParserDiagnostic
-ParserDiagnostic examine(Parser *p, const char* stat);
+ParserDiagnostic examine (Parser *p, const char *stat);
 
 #endif

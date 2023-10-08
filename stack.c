@@ -34,5 +34,4 @@ int
 stack_top (Stack *s)
 {
   return (s->__d > 0);
-  // s->s[s->__d];
 }

@@ -3,12 +3,6 @@
 #include "parser.h"
 
 void
-parser_add_data (Parser *p, char s)
-{
-  string_append (&p->data, s);
-}
-
-void
 parser_insert (Parser *p, char s)
 {
   Symbol z = create_symbol (s);
@@ -25,8 +19,52 @@ parser_pop (Parser *p, char s)
 void
 parser_start (Parser *p)
 {
-  string1 (&p->data);           // initialize the string
   stack_initialize (&p->stack); // initialize the stack
+}
+
+void
+parser_populate (Stack *p, const char *stat, string *str)
+{
+  int done = 0;
+  while (*stat != '\0')
+    {
+      if (symbol_real (*stat))
+        {
+          Symbol st = create_symbol (*stat);
+          switch (symbol_type (&st))
+            {
+            case 0:
+              if (!stack_top (p))
+                {
+                  stack_move (p, &st);
+                }
+              else
+                {
+                  string_append (str, *stat);
+                }
+              break;
+            case -1:
+              if (stack_top (p))
+                {
+                  done = 1;
+                  string_append (str, *stat);
+                }
+              else
+                {
+                  string_append (str, *stat);
+                }
+              break;
+            default:
+              string_append (str, *stat);
+              break;
+            }
+        }
+      *stat++;
+      if (done)
+        {
+          break;
+        }
+    }
 }
 
 ParserDiagnostic
@@ -61,9 +99,11 @@ examine (Parser *p, const char *stat)
         }
       *stat++;
     }
-    
-    if (p->stack.__d > 0) new.p_balanced = 0;
-    if (new.p_balanced != 0) new.p_balanced = 1;
-    
+
+  if (p->stack.__d > 0)
+    new.p_balanced = 0;
+  if (new.p_balanced != 0)
+    new.p_balanced = 1;
+
   return new;
 }

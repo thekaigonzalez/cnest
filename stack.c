@@ -22,6 +22,9 @@ stack_move (Stack *x, Symbol *y)
 void
 stack_pop (Stack *x, Symbol *y)
 {
+  if (x->__d <= 0) { 
+    return;
+  }
   Symbol *t = &x->s[x->__d - 1];
   
   if (same(t, y) == 0) {

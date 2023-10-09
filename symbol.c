@@ -33,16 +33,16 @@ empty ()
 int
 same (Symbol *x1, Symbol *x2)
 {
-  int x = 1;
+  int x = 1; // will return 0 if they are the same
 
   if (x1->__s == 0 && x2->__s == -1)
     {
-      x--;
+      x--; /* if they're similar, deincrement the return value */
 
-      if ((x1->__n == BRACE_OPEN || x1->__n == PAREN_OPEN)
-          && (x1->__n == BRACE_OPEN || x1->__n == PAREN_OPEN))
-        return x;
+      if ((x1->__n == BRACE_OPEN || x1->__n == PAREN_OPEN) // if they are both open tokens
+          && (x2->__n == BRACE_OPEN || x2->__n == PAREN_OPEN))
+        return x; // return x (0)
     }
 
-  return 1;
+  return 1; // anything else just return 1
 }
